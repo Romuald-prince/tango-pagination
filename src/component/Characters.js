@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SmartTable from "./SmartTable";
+import GenderFilter from "../filter/GenderFilter";
+import CultureFilter from "../filter/CultureFilter";
 const Characters = () => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
@@ -40,12 +42,12 @@ const Characters = () => {
       cell: (row) => <div>{row.died.length === 0 ? "Yes" : "No"}</div>,
     },
     {
-      name: "Gender",
+      name: <GenderFilter />,
       accessor: "gender",
       cell: (row) => <div>{showData(row.gender)}</div>,
     },
     {
-      name: "Culture",
+      name: <CultureFilter />,
       accessor: "culture",
       cell: (row) => <div>{showData(row.culture)}</div>,
     },
