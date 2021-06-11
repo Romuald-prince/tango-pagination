@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SmartTable from "./SmartTable";
+import GenderFilter from "../filter/GenderFilter";
+import CultureFilter from "../filter/CultureFilter";
 const Characters = () => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
@@ -28,15 +30,15 @@ const Characters = () => {
     {
       name: "Character",
       accessor: "name​",
-      cell: (row) => <div>{row.name}</div>
+      cell: (row) => <div>{row.name}</div>,
     },
     {
       name: "Alive",
       accessor: "createdDate",
-      cell: (row) => <div>{row.died.length===0?"Yes":"No"}</div>,
+      cell: (row) => <div>{row.died.length === 0 ? "Yes" : "No"}</div>,
     },
     {
-      name: "Gender",
+      name: <GenderFilter />,
       accessor: "gender",
       cell: (row) => <div>{showData(row.gender)}</div>,
     },
@@ -48,7 +50,23 @@ const Characters = () => {
 
     // todo: romuald will add other column
 
-    
+  {
+      name: Culture,
+      accessor: "culture",
+      cell: (row) => <div>{showData(row.culture)}</div>,
+    },
+    {
+      name: "Allegiances",
+      accessor: "allegiances",
+      cell: (row) => <div>{row.allegiances.length}</div>,
+    },
+    {
+      name: "Books",
+      accessor: "books",
+      cell: (row) => <div>{showData(row.books.length)}</div>,
+    },
+
+    // todo: romuald will add other column
   ];
 
   return (
