@@ -1,9 +1,9 @@
 import "./App.css";
-import Characters from "./pages/Characters";
+import Characters from "./component/Characters";
 function App() {
   return (
     <div className="App">
-      <Characters />
+      <Characters/>
     </div>
   );
 }
