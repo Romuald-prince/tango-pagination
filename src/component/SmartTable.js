@@ -1,19 +1,15 @@
 import React, { Component } from "react";
 
-
-
 import Pagination from "./Pagination";
 
 //bootstrap
 import { Col, Row, Button, Table } from "react-bootstrap";
 
-
-
 class SmartTable extends Component {
-  state = { 
+  state = {
     curruntPage: 1,
-    pageSizes:[10,20,50,100]
-   };
+    pageSizes: [10, 20, 50, 100],
+  };
 
   componentDidMount() {
     let pagination = this.props.pagination;
@@ -24,7 +20,7 @@ class SmartTable extends Component {
     let self = this;
     let columns = self.props.columns;
     if (columns && columns.length) {
-      return columns.map((column,i) => <th key={i}>{column.name}</th>);
+      return columns.map((column, i) => <th key={i}>{column.name}</th>);
     }
   }
 
@@ -34,9 +30,9 @@ class SmartTable extends Component {
     let data = self.props.data;
     let columns = self.props.columns;
     if (columns && columns.length) {
-      return data.map((item,i) => (
+      return data.map((item, i) => (
         <tr key={i}>
-          {columns.map((column,ic) => (
+          {columns.map((column, ic) => (
             <td key={ic}>{column.cell(item)}</td>
           ))}
         </tr>
@@ -54,18 +50,16 @@ class SmartTable extends Component {
     self.props.fetchData(page, size);
   }
 
-  handleSize(e){
+  handleSize(e) {
     let value = e.target.value;
     let self = this;
-    let size = value? value : 10;
+    let size = value ? value : 10;
     let page = self.props.page;
     // let pagination = self.props.pagination;
     // pagination.size = value? value : 10;
     // self.props.actions.setPagination(pagination);
     self.props.fetchData(page, size);
-    
   }
-
 
   render() {
     let pagination = this.props.pagination;
@@ -82,7 +76,7 @@ class SmartTable extends Component {
 
         <Col>
           <Row className="d-flex justify-content-center">
-          <Pagination
+            <Pagination
               current={this.state.curruntPage}
               total={this.props.total}
               pageSize={this.props.size}
@@ -98,13 +92,12 @@ class SmartTable extends Component {
               showSizeChanger
               onChange={(e) => this.pageOnChange(e)}
             /> */}
-            <select onChange={(e)=>this.handleSize(e)}>
-              {
-                this.state.pageSizes.map((item,i) =>(
-                  <option key={i} value={item}>{item}</option>
-                ))
-              }
-              
+            <select onChange={(e) => this.handleSize(e)}>
+              {this.state.pageSizes.map((item, i) => (
+                <option key={i} value={item}>
+                  {item}
+                </option>
+              ))}
             </select>
           </Row>
         </Col>
@@ -112,9 +105,5 @@ class SmartTable extends Component {
     );
   }
 }
-
-
-
-
 
 export default SmartTable;
