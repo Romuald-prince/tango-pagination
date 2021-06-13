@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SmartTable from "./SmartTable";
-import GenderFilter from "../filter/GenderFilter";
-import CultureFilter from "../filter/CultureFilter";
+
 const Characters = () => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
@@ -72,7 +71,22 @@ const Characters = () => {
 
   return (
     <div className="col">
-      <div className="row">filter component is here</div>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <input type="text" class="form-control" placeholder="First name" />
+          </div>
+          <div class="col">
+            <select id="inputState" class="form-control">
+              <option selected>Gender</option>
+              <option>Male</option>
+              <option>Female</option>
+              <option>Unkown</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
       <div className="row">
         <SmartTable
           columns={columns}

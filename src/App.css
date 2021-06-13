@@ -18,3 +18,8 @@
   flex-basis: width;
   background-color: rgb(235, 232, 51);
 }
+.form-control{
+margin-left: 15px;
+
+}
+
