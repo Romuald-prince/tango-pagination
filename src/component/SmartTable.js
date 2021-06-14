@@ -12,6 +12,7 @@ class SmartTable extends Component {
    };
 
   componentDidMount() {
+    console.log("props", this.props)
     this.props.fetchData(this.props.page, this.props.pageSize);
     console.log(this.props.total)
   }

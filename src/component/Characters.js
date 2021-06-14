@@ -21,7 +21,6 @@ const Characters = () => {
    }
   }
 
-
   const findsize =(text) =>{
       const firstIndex = text.indexOf("first");
       const startIndex = text.indexOf("page",firstIndex);
@@ -30,6 +29,7 @@ const Characters = () => {
       console.log("substring",substring);
       setTotal(substring);
   }
+  
   const  fetchData = async (page, size) => {
     await fetch(
       "https://anapioficeandfire.com/api/characters?page=" +

@@ -1,29 +1,22 @@
+import { Button } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
-import SmartTable from "./SmartTable";
 
 const Filter = () => {
-  const [data, setData] = useState([]);
-  const [filteredData, setFilteredData] = useState("");
-  const [filteredGender, setFilteredGender] = useState([]);
+  const [searchValues, setSearchValues] = useState({culter:"",gender:""});
 
-  useEffect((page, size) => {
-    fetch(
-      "https://anapioficeandfire.com/api/characters?page=" +
-        page +
-        "&pageSize=" +
-        size
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-      });
-  }, []);
-
-  function search(rows) {
-    return rows.filter(
-      (row) => row.culter.toLowerCase().indexOf(filteredData) > -1
-    );
+  const handleChange = (e) =>{
+    const name = e.target.name;
+    console.log(e.target)
+    const value = e.taget.value;
+    searchValues[name] = value;
+    setSearchValues(...searchValues);
   }
+
+  
+
+  
+
+ 
 
   return (
     <div>
@@ -32,29 +25,30 @@ const Filter = () => {
           <div class="col">
             <input
               type="text"
+              name="culter"
               class="form-control"
               placeholder="Culter"
-              value={filteredData}
-              onChange={(event) => {
-                setFilteredData(event.target.value);
+              value={searchValues.culter}
+              onChange={(e) => {
+                handleChange(e);
               }}
             />
           </div>
           <div>
-            <SmartTable data={search(data)} />
+            
           </div>
           <div class="col">
             <select
-              id="inputState"
               class="form-control"
-              onClick={() => setFilteredGender()}
+              onChange={(e)=> handleChange(e)}
             >
-              <option selected>Gender</option>
-              <option>Male</option>
-              <option>Female</option>
-              <option>Unkown</option>
+              <option value="">All</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="unknown">Unkown</option>
             </select>
           </div>
+          <Button>Search</Button>
         </div>
       </div>
     </div>
