@@ -2,21 +2,15 @@ import { Button } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
 
 const Filter = () => {
-  const [searchValues, setSearchValues] = useState({culter:"",gender:""});
+  const [searchValues, setSearchValues] = useState({ culter: "", gender: "" });
 
-  const handleChange = (e) =>{
+  const handleChange = (e) => {
     const name = e.target.name;
-    console.log(e.target)
-    const value = e.taget.value;
+    console.log(e.target);
+    const value = e.target.value;
     searchValues[name] = value;
-    setSearchValues(...searchValues);
-  }
-
-  
-
-  
-
- 
+    setSearchValues({ ...searchValues });
+  };
 
   return (
     <div>
@@ -34,14 +28,9 @@ const Filter = () => {
               }}
             />
           </div>
-          <div>
-            
-          </div>
+          <div></div>
           <div class="col">
-            <select
-              class="form-control"
-              onChange={(e)=> handleChange(e)}
-            >
+            <select class="form-control" onChange={(e) => handleChange(e)}>
               <option value="">All</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
