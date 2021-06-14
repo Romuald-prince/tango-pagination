@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import {Link} from "react-router-dom";
 import {Button} from "react-bootstrap";
 import SmartTable from "./SmartTable";
+import Filter from "./Filter";
+
 const Characters = () => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
@@ -131,7 +133,7 @@ const Characters = () => {
 
   return (
     <div className="col">
-      <div className="row">filter component is here</div>
+      <Filter />
       <div className="row">
         <SmartTable
           columns={columns}
