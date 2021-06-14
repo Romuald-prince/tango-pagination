@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { Pagination } from "react-bootstrap";
 
-const Pagination = (props) => {
+const SmartPagination = (props) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const isCurrentPage = (number) => {
@@ -9,27 +10,22 @@ const Pagination = (props) => {
 
   const handleCurrentPage = (number) => {
     setCurrentPage(number);
-
+    props.listener(number);
   };
 
   const createItem = (number) => {
     return number ? (
-      <li key={number}>
-        <button
-          className={isCurrentPage(number) + "visible"}
-          onClick={() => handleCurrentPage(number)}
-        >
-          {number}
-        </button>
-      </li>
+      <Pagination.Item active={number === currentPage} key={number} onClick={() => handleCurrentPage(number)}>
+        {number}
+      </Pagination.Item>
     ) : (
-      <li key={number}>...</li>
+      <Pagination.Ellipsis key={number} />
     );
   };
 
   const renderPage = () => {
     let list = [];
-    const countPage = Math.ceil(props.total / props.pageSize);
+    const countPage = Math.ceil(props.total);
     let n = 1;
     while (n <= countPage) {
       let item;
@@ -65,10 +61,14 @@ const Pagination = (props) => {
     return list;
   };
   return (
-    <section id="pagination">
-      <ul>{renderPage()}</ul>
-    </section>
+    <Pagination id="pagination">
+      <Pagination.First onClick={()=>handleCurrentPage(1)}/>
+      <Pagination.Prev onClick={()=>handleCurrentPage(currentPage-1)}/>
+      {renderPage()}
+      <Pagination.Next onClick={()=>handleCurrentPage(currentPage+1)}/>
+      <Pagination.Last onClick={()=>handleCurrentPage(props.total)}/>
+    </Pagination>
   );
 };
 
-export default Pagination;
+export default SmartPagination;

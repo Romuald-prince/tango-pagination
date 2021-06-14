@@ -12,12 +12,12 @@ import { Col, Row, Button, Table } from "react-bootstrap";
 class SmartTable extends Component {
   state = { 
     curruntPage: 1,
-    pageSizes:[10,20,50,100]
+    pageSizes:[10,25,50]
    };
 
   componentDidMount() {
-    let pagination = this.props.pagination;
     this.props.fetchData(this.props.page, this.props.pageSize);
+    console.log(this.props.total)
   }
 
   renderColumn() {
@@ -44,9 +44,9 @@ class SmartTable extends Component {
     }
   }
 
-  pageOnChange(page) {
+  pageOnChange = (page) => {
     let self = this;
-    let size = self.props.size;
+    let size = this.props.size;
 
     // let pagination = self.props.pagination;
     // pagination.page = page;
@@ -56,13 +56,14 @@ class SmartTable extends Component {
 
   handleSize(e){
     let value = e.target.value;
+    console.log(value)
     let self = this;
     let size = value? value : 10;
     let page = self.props.page;
     // let pagination = self.props.pagination;
     // pagination.size = value? value : 10;
     // self.props.actions.setPagination(pagination);
-    self.props.fetchData(page, size);
+    self.props.fetchData(1, size);
     
   }
 
@@ -81,14 +82,12 @@ class SmartTable extends Component {
         </Col>
 
         <Col>
-          <Row className="d-flex justify-content-center">
+          <Row  className="d-flex justify-content-center">
           <Pagination
-              current={this.state.curruntPage}
               total={this.props.total}
               pageSize={this.props.size}
-              current={this.props.page}
-              showSizeChanger
-              onChange={(e) => this.pageOnChange(e)}
+              page={this.props.page}
+              listener={this.pageOnChange}
             />
             {/* <Pagination
               current={this.state.curruntPage}
@@ -98,7 +97,7 @@ class SmartTable extends Component {
               showSizeChanger
               onChange={(e) => this.pageOnChange(e)}
             /> */}
-            <select onChange={(e)=>this.handleSize(e)}>
+            <select className="pageSize" onChange={(e)=>this.handleSize(e)}>
               {
                 this.state.pageSizes.map((item,i) =>(
                   <option key={i} value={item}>{item}</option>

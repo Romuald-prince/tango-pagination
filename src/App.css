@@ -18,3 +18,77 @@
   flex-basis: width;
   background-color: rgb(235, 232, 51);
 }
+
+#pagination-btn {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+#pagination-btn button {
+  background-color: rgba(0, 26, 255, 0.904);
+  color: white;
+  font-size: 15px;
+  border: 1px solid rgba(0, 26, 255, 0.904);
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+#pagination-btn .disabled {
+  background-color: gray;
+  color: black;
+  border: gray solid 1px;
+}
+
+#pagination-btn button:active:focus {
+  font-size: 16px;
+}
+
+.pageSize {
+  align-items: center;
+  min-width: 6ch;
+  border: 0.05em solid #80808047;
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+  font-size: 1.05rem;
+  cursor: pointer;
+  background-color: #f8f9fa;
+  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+  height: 38px;
+  margin-left: 5px;
+}
+
+.pageSize :focus-visible{
+  border: 0.05em solid #80808047 !important;
+  outline: none !important;
+  outline-offset: none !important;
+}
+
+.name-field{
+  text-align: -webkit-center;
+  
+}
+.name-field p{
+  max-width: fit-content;
+}
+
+.info-area{
+  background-color: aliceblue;
+  border-radius: 15px;
+}
+
+
+.info-area .row{
+  border-bottom:1px solid gainsboro;
+  padding: 10px;
+}
+
+.info-area .col{
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.info-area h3{
+  font-size: 25px;
+  font-weight: 600;
+  vertical-align: middle;
+}
