@@ -9,24 +9,22 @@ const Characters = () => {
   const [pageSize, setPageSize] = useState(10);
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
+  const [searchText, setSearchText] = useState("");
 
 
   const setLinkToState = (res) =>{
     for (var pair of res.headers.entries()) {
       if(pair[0] === "link"){
         findsize(pair[1]);
-        console.log(typeof pair[1])
       }
-      console.log(pair[0]+ ': '+ pair[1]);
    }
   }
 
   const findsize =(text) =>{
       const firstIndex = text.indexOf("first");
       const startIndex = text.indexOf("page",firstIndex);
-      const finishIndex = text.indexOf("&",firstIndex);
+      const finishIndex = text.indexOf("&",startIndex);
       const substring = parseInt(text.substring(startIndex,finishIndex).replace(/\D/g, ""),10);
-      console.log("substring",substring);
       setTotal(substring);
   }
   
@@ -35,14 +33,14 @@ const Characters = () => {
       "https://anapioficeandfire.com/api/characters?page=" +
         page +
         "&pageSize=" +
-        size
+        size +
+        searchText
     )
     .then(res => {setLinkToState(res); return res})
       .then((res) => res.json())
       .then((data) => {
         setPage(page);
         setPageSize(size);
-        console.log(data);
         setData(data);
         
       });
@@ -51,6 +49,9 @@ const Characters = () => {
   useEffect(() => {
     fetchData(page, pageSize);
   }, []);
+  useEffect(()=>{
+    fetchData(page,pageSize)
+  },[searchText])
 
   const showData = (data,accessor) => {
     let value = null;
@@ -131,9 +132,14 @@ const Characters = () => {
     // todo: romuald will add other column
   ];
 
+  const searchTextListener = (text) =>{
+      setSearchText(text);
+      fetchData(1,10);
+  }
+
   return (
     <div className="col">
-      <Filter />
+      <Filter listener={searchTextListener}/>
       <div className="row">
         <SmartTable
           columns={columns}

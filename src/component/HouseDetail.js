@@ -19,10 +19,6 @@ const HouseDetail = () => {
       });
   };
 
-  useEffect(() => {
-    console.log(house);
-  });
-
   const showData = (accessor) => {
     const value = house[accessor];
     if (value && value.length > 0) return value;

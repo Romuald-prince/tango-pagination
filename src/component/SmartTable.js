@@ -12,9 +12,7 @@ class SmartTable extends Component {
    };
 
   componentDidMount() {
-    console.log("props", this.props)
     this.props.fetchData(this.props.page, this.props.pageSize);
-    console.log(this.props.total)
   }
 
   renderColumn() {
@@ -30,7 +28,7 @@ class SmartTable extends Component {
 
     let data = self.props.data;
     let columns = self.props.columns;
-    if (columns && columns.length) {
+    if (columns && data && data.length>0 && columns.length) {
       return data.map((item, i) => (
         <tr key={i}>
           {columns.map((column, ic) => (
@@ -53,7 +51,6 @@ class SmartTable extends Component {
 
   handleSize(e) {
     let value = e.target.value;
-    console.log(value)
     let self = this;
     let size = value ? value : 10;
     let page = self.props.page;
